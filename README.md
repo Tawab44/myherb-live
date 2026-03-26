@@ -400,37 +400,10 @@ Google Gemini API (chatbot) multiple models
 
 
 ---🛠️ Installation & Setup---
-🔹 Clone Repository or Install Zip 
-git clone https://github.com/yourusername/myherb.git
-cd myherb
-
-🔹 Backend Setup
-
--cd Backend
-
--npm install
-
--npm run dev
-
-
-Create .env: 
-
-🔹 Frontend Setup
-
--cd Frontend
-
--npm install
-
--npm run dev
-
-
-🔹 ML API Setup
-
--cd MLend
--pip install -r requirements.txt
--uvicorn app:app --reload
-
-
+This is production code (no localhost)for locally running ml model+node server go to--
+https://github.com/Tawab44/myherb
+ 
+ 
  🔚
 
 If you found this project useful, feel free to ⭐ star the repository.

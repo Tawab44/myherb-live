@@ -39,24 +39,30 @@ const handleSubmit = async (e) => {
   }
 
   setLoading(true);
-  setScanning(true);   // 🔥 START SCANNING
-
-  const formData = new FormData();
-  formData.append("file", selectedImage);
+  setScanning(true);
 
   try {
-    const res = await axios.post(
-      "http://127.0.0.1:8000/predict/",
-      formData,
-      { headers: { "Content-Type": "multipart/form-data" } }
-    );
+    // convert image → base64
+    const reader = new FileReader();
 
-    // ⏳ Ensure scanning s
-    setTimeout(() => {
-      setPrediction(res.data);
-      setScanning(false);
-      setLoading(false);
-    }, 2000);
+    reader.onloadend = async () => {
+      const base64Image = reader.result;
+
+      const res = await axios.post(
+        "https://ronaldo-7-herbmlend.hf.space/run/predict",
+        {
+          data: [base64Image]
+        }
+      );
+
+      setTimeout(() => {
+        setPrediction(res.data.data[0]);
+        setScanning(false);
+        setLoading(false);
+      }, 2000);
+    };
+
+    reader.readAsDataURL(selectedImage);
 
   } catch (err) {
     console.error(err);

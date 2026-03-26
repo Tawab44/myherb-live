@@ -48,9 +48,6 @@ const handleSubmit = async (e) => {
       image: selectedImage, // File object directly from input
     });
 
-    console.log("Full result:", result);        // 👈 add this
-    console.log("result.data:", result.data);   // 👈 and this
-
     setPrediction(result.data[0]);
     setScanning(false);
     setLoading(false);

@@ -1,48 +1,43 @@
-import dotenv from "dotenv";
-dotenv.config();
+import { Resend } from "resend";
 
-import nodemailer from "nodemailer";
-
-const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 587,
-  secure: false,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
+// Direct API key 
+const resend = new Resend("re_D9vz8WuA_3nPVvhKTLzM7nLQVGsukn1ts");
 
 export const sendConfirmationEmail = async (to, name) => {
-  const mailOptions = {
-    from: `"Herb AI 🌿" <${process.env.EMAIL_USER}>`,
-    to,
-    subject: "Your Contribution has been received.",
-    html: `
-      <p>Dear ${name || "Contributor"},</p>
+  try {
+    const response = await resend.emails.send({
+      from: "Herb AI 🌿 <onboarding@resend.dev>", // default sender (works immediately)
+      to: [to],
+      subject: "Your Contribution has been received 🌿",
+      html: `
+        <p>Dear ${name || "Contributor"},</p>
 
-      <p>
-        Thank you for your herb contribution! We truly appreciate you
-        taking the time to share it with us.
-      </p>
+        <p>
+          Thank you for your herb contribution! We truly appreciate you
+          taking the time to share it with us.
+        </p>
 
-      <p>
-        Our team will carefully review your submission and
-        once approved, add it to our herb library.
-      </p>
+        <p>
+          Our team will carefully review your submission and once approved,
+          add it to our herb library.
+        </p>
 
-      <p>
-        Thanks again for contributing to our growing herb community.
-      </p>
+        <p>
+          Thanks again for contributing to our growing herb community.
+        </p>
 
-      <br/>
+        <br/>
 
-      <p>
-        Best regards,<br/>
-        Herb AI Team 🌿
-      </p>
-    `,
-  };
+        <p>
+          Best regards,<br/>
+          Herb AI Team 🌿
+        </p>
+      `,
+    });
 
-  await transporter.sendMail(mailOptions);
+    console.log("✅ Email sent:", response);
+  } catch (error) {
+    console.error("❌ Email error:", error);
+    throw error; // IMPORTANT: keeps your "must send email" requirement
+  }
 };

@@ -10,7 +10,7 @@ const Herbcare = () => {
   useEffect(() => {
     const fetchHerbs = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/care");
+        const res = await axios.get("https://myherb-live.onrender.com/api/care");
         setHerbs(res.data);
       } catch (err) {
         console.error(err);

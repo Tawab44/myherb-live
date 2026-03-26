@@ -42,29 +42,46 @@ const handleSubmit = async (e) => {
   setScanning(true);
 
   try {
-    // convert image → base64
     const reader = new FileReader();
 
     reader.onloadend = async () => {
       const base64Image = reader.result;
 
-      const res = await axios.post(
-        "https://ronaldo-7-mlendherb.hf.space/api/predict",
+      // STEP 1: JOIN QUEUE
+      const joinRes = await axios.post(
+        "https://ronaldo-7-mlendherb.hf.space/queue/join",
         {
           data: [base64Image]
         }
       );
 
-setPrediction(res.data.data[0]);
-setScanning(false);
-setLoading(false);
+      const eventId = joinRes.data.event_id;
+
+      // STEP 2: POLL RESULT
+      let result = null;
+
+      while (!result) {
+        const res = await axios.get(
+          `https://ronaldo-7-mlendherb.hf.space/queue/data?event_id=${eventId}`
+        );
+
+        if (res.data.status === "COMPLETE") {
+          result = res.data.output.data[0];
+        }
+
+        await new Promise((r) => setTimeout(r, 1000));
+      }
+
+      setPrediction(result);
+      setScanning(false);
+      setLoading(false);
     };
 
     reader.readAsDataURL(selectedImage);
 
   } catch (err) {
     console.error(err);
-    alert("Error uploading or predicting!");
+    alert("Prediction failed");
     setScanning(false);
     setLoading(false);
   }

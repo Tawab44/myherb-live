@@ -38,6 +38,7 @@ const Query = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // ✅ KEEP ALL VALIDATIONS INCLUDING IMAGE
     if (
       !formData.commonName ||
       !formData.email ||
@@ -50,20 +51,12 @@ const Query = () => {
       return;
     }
 
-    const data = new FormData();
-
-    Object.keys(formData).forEach((key) => {
-      if (Array.isArray(formData[key])) {
-        formData[key].forEach((val) => data.append(key, val));
-      } else {
-        data.append(key, formData[key]);
-      }
-    });
-
-    if (image) data.append("image", image);
-
     try {
-      await axios.post("https://myherb-live.onrender.com/api/queries", data);
+      // ✅ SEND ONLY TEXT DATA (NO IMAGE)
+      await axios.post(
+        "https://myherb-live.onrender.com/api/queries",
+        formData
+      );
 
       alert("Submission successful 🌿");
 
@@ -93,8 +86,6 @@ const Query = () => {
         background: `url(${queryBg}) center/cover no-repeat`,
       }}
     >
-      {/* ===== HEADING ===== */}
-
       <h1 className="query-heading">
         Add Your Discovery to the{" "}
         <span>Herb Network & Library</span> 🌿
@@ -102,13 +93,12 @@ const Query = () => {
 
       <p className="query-subheading">
         If you’ve discovered a herb or information missing from our collection,
-        share it with us. Our team will review and verify your submission.
+        share it with us.
       </p>
-
-      {/* ===== FORM BOX ===== */}
 
       <div className="query-card">
         <form onSubmit={handleSubmit} className="query-form">
+
           <input
             name="commonName"
             placeholder="Common / Regional Name *"
@@ -124,9 +114,9 @@ const Query = () => {
             onChange={handleChange}
           />
 
-          {/* UPLOAD */}
+          {/* ✅ IMAGE UI ONLY */}
           <div>
-            <label>Upload Image </label>
+            <label>Upload Image *</label>
 
             <label className="upload-box">
               📤 Click to Upload Herb Image
@@ -134,7 +124,7 @@ const Query = () => {
                 type="file"
                 accept="image/*"
                 onChange={(e) => setImage(e.target.files[0])}
-                
+                required
               />
             </label>
 
@@ -237,7 +227,6 @@ const Query = () => {
             required
           />
 
-          {/* PERMISSION */}
           <label className="permission">
             <input
               type="checkbox"

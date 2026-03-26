@@ -1,0 +1,193 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.navbar {
+  height: 60px;
+  position: sticky;          
+  top: 0;
+  z-index: 1000;
+  
+  background-color: rgba(43, 182, 82, 0.5);
+  backdrop-filter: blur(12px);        
+  -webkit-backdrop-filter: blur(12px);
+  
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  font-family: 'Poppins', sans-serif;
+
+  
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.nav-links a:hover {
+  color: #030506;
+}
+.logout-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 18px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.logout-btn:hover {
+  color: #f87171;
+}
+.logo-img {
+  height: 45px;          
+  width: auto;           
+  object-fit: contain;
+  cursor: pointer;
+}
+
+/* Base nav button */
+.nav-btn {
+  padding: 8px 20px;
+  border-radius: 900px;        
+  font-weight: 500;
+  transition: all 0.3s ease;
+
+  display: inline-flex;        /* 👈 normalize */
+  align-items: center;         /* 👈 vertical centering */
+  justify-content: center;
+  line-height: 1;
+}
+
+/* Login button (glass style) */
+.login-btn {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.login-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  color: #030506;
+}
+
+
+.signup-btn {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: white;
+  box-shadow: 0 4px 15px rgba(34, 197, 94, 0.4);
+}
+
+.signup-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(34, 197, 94, 0.6);
+}
+
+/* VGarden button (light green) */
+.vgarden-btn {
+  background: rgba(44, 170, 88, 0.85); /* light green */
+  color: #14532d;
+  border: 1px solid rgba(34, 197, 94, 0.6);
+}
+
+.vgarden-btn:hover {
+  background: rgba(34, 197, 94, 0.95);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(34, 197, 94, 0.5);
+}
+/* Logout button (red) */
+.logout-btn {
+  background: rgba(248, 113, 113, 0.9);
+  color: white;
+  border: 1px solid rgba(220, 38, 38, 0.7);
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background: rgb(220, 38, 38);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(198, 71, 71, 0.6);
+}
+
+.logout-btn:hover {
+  color: #000;
+}
+
+.query-btn {
+  background: linear-gradient(135deg, #c2ec17, #16a34a);
+  color: white;
+  box-shadow: 0 4px 15px rgba(34, 197, 94, 0.4);
+}
+
+.query-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(34, 197, 94, 0.6);
+}
+
+.herbcare-btn {
+  background: linear-gradient(135deg, #26f51f, #118b3e);
+  color: white;
+  box-shadow: 0 4px 15px rgba(34, 197, 94, 0.4);
+}
+
+.herbcare-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(34, 197, 94, 0.6);
+}
+
+/* ================= MOBILE RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+
+  .navbar {
+    height: auto;                 /* allow expansion */
+    flex-wrap: wrap;              /* allow items to move to next line */
+    padding: 10px 15px;
+    gap: 10px;
+  }
+
+  /* Logo smaller */
+  .logo-img {
+    height: 38px;
+  }
+
+  /* Nav list goes below logo */
+  .nav-links {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  /* Smaller links */
+  .nav-links a,
+  .logout-btn {
+    font-size: 14px;
+  }
+
+  /* Smaller pill buttons */
+  .nav-btn {
+    padding: 6px 14px;
+    font-size: 14px;
+  }
+
+}

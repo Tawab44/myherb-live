@@ -1,0 +1,107 @@
+/* Import Poppins font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+
+
+.herbcare-container {
+  padding: 30px;
+  text-align: center;
+}
+
+.search-input {
+  margin: 20px 0;
+  padding: 12px;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+.herb-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.herb-card {
+  background: #f0fdf4;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 5px 12px rgba(0,0,0,0.1);
+}
+
+.herb-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.care-list {
+  text-align: left;
+  margin-top: 10px;
+}
+
+.fact-box {
+  margin-top: 15px;
+  padding: 12px;
+  background: #e8f5e9;
+  border-left: 6px solid #2e7d32;
+  border-radius: 8px;
+}
+
+/* Intro paragraph */
+.intro-text {
+  max-width: 700px;
+  margin: 15px auto 25px;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+/* Left-aligned text sections */
+.left-text {
+  text-align: left;
+  margin-bottom: 15px;
+}
+
+/* SINGLE CARD CENTERING */
+.herb-card {
+  max-width: 800px;
+  margin: 0 auto;
+  background: #f0fdf4;
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+}
+
+/* TWO COLUMN CARE GRID */
+.care-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+/* LIGHT CARE BOXES */
+.care-box {
+  background: #e8f5e9;
+  padding: 12px 14px;
+  border-radius: 8px;
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+/* Make last item span full width */
+.care-box.full {
+  grid-column: span 2;
+}
+
+/* Stack cards vertically with spacing */
+.herb-card {
+  max-width: 800px;
+  margin: 25px auto;
+  background: #f0fdf4;
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+}

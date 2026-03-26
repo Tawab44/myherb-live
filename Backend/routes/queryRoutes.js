@@ -4,7 +4,7 @@ import { sendConfirmationEmail } from "../utils/sendEmail.js";
 
 const router = express.Router();
 
-/* POST Query (N IMG) */
+/* POST Query */
 router.post("/", async (req, res) => {
   try {
     const query = new Query({
@@ -17,12 +17,19 @@ router.post("/", async (req, res) => {
       notes: req.body.notes,
       contributorName: req.body.contributorName,
       email: req.body.email,
-      permission: req.body.permission,
-      imageUrl: null, //  n image 
+
+      // 🔥 FIX BOOLEAN ISSUE
+      permission:
+        req.body.permission === true ||
+        req.body.permission === "true",
+
+      imageUrl: null,
     });
 
+    // ✅ SAVE FIRST
     await query.save();
 
+    // ✅ THEN SEND EMAIL
     await sendConfirmationEmail(
       req.body.email,
       req.body.contributorName
@@ -33,8 +40,12 @@ router.post("/", async (req, res) => {
     });
 
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Submission failed" });
+    console.error("❌ Query error:", error.message);
+
+    res.status(500).json({
+      message: "Submission failed",
+      error: error.message, // 🔥 helps debugging
+    });
   }
 });
 

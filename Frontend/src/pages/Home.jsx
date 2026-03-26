@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+// import axios from "axios";
 import { Link } from "react-router-dom";
 import homeBg from "../assets/mist.gif";
 import loginImg from "../assets/vgardenf.png";
@@ -7,6 +7,7 @@ import featureImg from "../assets/herbbgtr2.png";
 import youtubeBg from "../assets/takpl.png";
 import "../styles/home.css";
 import scanGif from "../assets/Scan.gif";
+import { Client } from "@gradio/client";
 
 const Home = () => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -42,46 +43,18 @@ const handleSubmit = async (e) => {
   setScanning(true);
 
   try {
-    const reader = new FileReader();
+    const client = await Client.connect("Ronaldo-7/MlendHerb");
+    const result = await client.predict("/predict", {
+      image: selectedImage, // File object directly from input
+    });
 
-    reader.onloadend = async () => {
-      const base64Image = reader.result;
-
-      // STEP 1: JOIN QUEUE
-      const joinRes = await axios.post(
-        "https://ronaldo-7-mlendherb.hf.space/queue/join",
-        {
-          data: [base64Image]
-        }
-      );
-
-      const eventId = joinRes.data.event_id;
-
-      // STEP 2: POLL RESULT
-      let result = null;
-
-      while (!result) {
-        const res = await axios.get(
-          `https://ronaldo-7-mlendherb.hf.space/queue/data?event_id=${eventId}`
-        );
-
-        if (res.data.status === "COMPLETE") {
-          result = res.data.output.data[0];
-        }
-
-        await new Promise((r) => setTimeout(r, 1000));
-      }
-
-      setPrediction(result);
-      setScanning(false);
-      setLoading(false);
-    };
-
-    reader.readAsDataURL(selectedImage);
+    setPrediction(result.data);
+    setScanning(false);
+    setLoading(false);
 
   } catch (err) {
     console.error(err);
-    alert("Prediction failed");
+    alert("Error uploading or predicting!");
     setScanning(false);
     setLoading(false);
   }

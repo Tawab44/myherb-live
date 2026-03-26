@@ -10,7 +10,7 @@ const Vgarden = () => {
   useEffect(() => {
     const fetchPlants = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/plants");
+        const res = await axios.get("https://myherb-live.onrender.com/api/plants");
         setPlants(res.data);
       } catch (error) {
         console.error(error);

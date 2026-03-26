@@ -63,7 +63,7 @@ const Query = () => {
     if (image) data.append("image", image);
 
     try {
-      await axios.post("http://localhost:5000/api/queries", data);
+      await axios.post("https://myherb-live.onrender.com/api/queries", data);
 
       alert("Submission successful 🌿");
 

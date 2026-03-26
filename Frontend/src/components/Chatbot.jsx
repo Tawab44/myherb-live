@@ -20,7 +20,7 @@ const Chatbot = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/chat",
+        "https://myherb-live.onrender.com/api/chat",
         { message: input }
       );
 

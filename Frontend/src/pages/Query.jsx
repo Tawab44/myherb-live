@@ -126,7 +126,7 @@ const Query = () => {
 
           {/* UPLOAD */}
           <div>
-            <label>Upload Image *</label>
+            <label>Upload Image </label>
 
             <label className="upload-box">
               📤 Click to Upload Herb Image
@@ -134,7 +134,7 @@ const Query = () => {
                 type="file"
                 accept="image/*"
                 onChange={(e) => setImage(e.target.files[0])}
-                required
+                
               />
             </label>
 

@@ -49,7 +49,7 @@ const handleSubmit = async (e) => {
       const base64Image = reader.result;
 
       const res = await axios.post(
-        "https://ronaldo-7-herbmlend.hf.space/run/predict",
+        "https://ronaldo-7-mlendherb.hf.space/api/predict",
         {
           data: [base64Image]
         }

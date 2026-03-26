@@ -55,11 +55,9 @@ const handleSubmit = async (e) => {
         }
       );
 
-      setTimeout(() => {
-        setPrediction(res.data.data[0]);
-        setScanning(false);
-        setLoading(false);
-      }, 2000);
+setPrediction(res.data.data[0]);
+setScanning(false);
+setLoading(false);
     };
 
     reader.readAsDataURL(selectedImage);
